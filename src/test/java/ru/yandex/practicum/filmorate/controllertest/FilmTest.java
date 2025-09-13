@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import ru.yandex.practicum.filmorate.adapter.DurationAdapter;
 import ru.yandex.practicum.filmorate.adapter.LocalDateAdapter;
 import ru.yandex.practicum.filmorate.model.Film;
@@ -18,18 +20,21 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class FilmTest {
     private HttpClient client;
 
     private URI url;
+
+    @LocalServerPort
+    private int port;
 
     private Gson gson;
 
     @BeforeEach
     public void setUp() {
         client = HttpClient.newHttpClient();
-        url = URI.create("http://localhost:8080/films");
+        url = URI.create("http://localhost:" + port + "/films");
         GsonBuilder builder = new GsonBuilder()
                 .setPrettyPrinting()
                 .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
