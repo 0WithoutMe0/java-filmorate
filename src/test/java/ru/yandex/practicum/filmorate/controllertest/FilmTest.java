@@ -1,4 +1,4 @@
-package controllertest;
+package ru.yandex.practicum.filmorate.controllertest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
