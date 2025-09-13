@@ -21,5 +21,5 @@ public class Film {
 
     LocalDate releaseDate;
 
-    Duration duration;
+    long duration;
 }

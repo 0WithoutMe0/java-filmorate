@@ -39,7 +39,7 @@ public class FilmTest {
 
     @Test
     public void filmCorrectRequestTest() throws IOException, InterruptedException {
-        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки", LocalDate.of(1975, 1, 1), Duration.ofMinutes(110)));
+        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки", LocalDate.of(1975, 1, 1), 110));
         HttpRequest request = HttpRequest.newBuilder()
                 .setHeader("Content-Type", "application/json")
                 .uri(url)
@@ -52,7 +52,7 @@ public class FilmTest {
 
     @Test
     public void filmEmptyNameTest() throws IOException, InterruptedException {
-        String filmStr = gson.toJson(new Film(0L, " ", "Акулки", LocalDate.of(1975, 1, 1), Duration.ofMinutes(110)));
+        String filmStr = gson.toJson(new Film(0L, " ", "Акулки", LocalDate.of(1975, 1, 1), 110));
         HttpRequest request = HttpRequest.newBuilder()
                 .setHeader("Content-Type", "application/json")
                 .uri(url)
@@ -65,7 +65,7 @@ public class FilmTest {
 
     @Test
     public void filmIncorrectDescriptionTest() throws IOException, InterruptedException {
-        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки".repeat(200), LocalDate.of(1975, 1, 1), Duration.ofMinutes(110)));
+        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки".repeat(200), LocalDate.of(1975, 1, 1), 110));
         HttpRequest request = HttpRequest.newBuilder()
                 .setHeader("Content-Type", "application/json")
                 .uri(url)
@@ -78,7 +78,7 @@ public class FilmTest {
 
     @Test
     public void filmIncorrectDateTest() throws IOException, InterruptedException {
-        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки", LocalDate.of(1861, 1, 1), Duration.ofMinutes(110)));
+        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки", LocalDate.of(1861, 1, 1), 110));
         HttpRequest request = HttpRequest.newBuilder()
                 .setHeader("Content-Type", "application/json")
                 .uri(url)
@@ -91,7 +91,7 @@ public class FilmTest {
 
     @Test
     public void filmIncorrectTimeTest() throws IOException, InterruptedException {
-        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки", LocalDate.of(1861, 1, 1), Duration.ofMinutes(0)));
+        String filmStr = gson.toJson(new Film(0L, "Челюсти", "Акулки", LocalDate.of(1861, 1, 1), 110));
         HttpRequest request = HttpRequest.newBuilder()
                 .setHeader("Content-Type", "application/json")
                 .uri(url)
