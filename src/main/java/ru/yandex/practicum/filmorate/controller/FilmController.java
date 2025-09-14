@@ -62,7 +62,7 @@ public class FilmController {
         return ++currentId;
     }
 
-    public void isValid(Film film){
+    public void isValid(Film film) {
         if (film.getName().isBlank()) {
             throw new ValidationException("Название не может быть пустым");
         } else if (film.getDescription().length() > 200) {

@@ -63,6 +63,7 @@ public class UserController {
 
         return ++currentId;
     }
+
     public void isValid(User user) {
         if (user.getEmail().isBlank() || !user.getEmail().contains("@")) {
             throw new ValidationException("Некорректный ввод электроной почты");
