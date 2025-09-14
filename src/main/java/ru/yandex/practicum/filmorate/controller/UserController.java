@@ -27,13 +27,7 @@ public class UserController {
     @PostMapping
     public User create(@RequestBody User user) {
         log.info("Получен запрос на создание пользователя");
-        if (user.getEmail().isBlank() || !user.getEmail().contains("@")) {
-            throw new ValidationException("Некорректный ввод электроной почты");
-        } else if (user.getLogin().isEmpty() || user.getLogin().contains(" ")) {
-            throw new ValidationException("Логин не может быть пустым и содержать пробелы");
-        } else if (user.getBirthday().isAfter(LocalDate.now())) {
-            throw new ValidationException("Дата рождения не может быть в будущем");
-        }
+        isValid(user);
 
         if (user.getName() == null) {
             user.setName(user.getLogin());
@@ -48,6 +42,7 @@ public class UserController {
     @PutMapping
     public User update(@RequestBody User user) {
         log.info("Получен запрос на обновление данных пользователя");
+        isValid(user);
         if (!users.containsKey(user.getId())) {
             throw new NotFoundException("Введен неверный Id");
         } else if (user.getName() == null || user.getEmail() == null || user.getLogin() == null) {
@@ -67,5 +62,14 @@ public class UserController {
                 .orElse(0);
 
         return ++currentId;
+    }
+    public void isValid(User user) {
+        if (user.getEmail().isBlank() || !user.getEmail().contains("@")) {
+            throw new ValidationException("Некорректный ввод электроной почты");
+        } else if (user.getLogin().isEmpty() || user.getLogin().contains(" ")) {
+            throw new ValidationException("Логин не может быть пустым и содержать пробелы");
+        } else if (user.getBirthday().isAfter(LocalDate.now())) {
+            throw new ValidationException("Дата рождения не может быть в будущем");
+        }
     }
 }
